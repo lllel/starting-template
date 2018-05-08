@@ -1,0 +1,13 @@
+extends templates/main-template
+
+block variables
+  -
+    pageTitle = 'Форма';
+    pageName = 'form';
+
+block vars
+  - headerMainLogo = 'header-main__logo--small-height'
+
+block main
+  form.form-main(action='#' method='POST')
+

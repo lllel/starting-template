@@ -1,0 +1,27 @@
+mixin slideDescription (title, info)
+  div.slider-description__slide
+    h2.slider-description__title= title
+    p.slider-description__info= info
+
+mixin slideReview (userName, info, img)
+  div.slider-reviews__slide
+    h2.slider-reviews__user-name= userName
+    p.slider-reviews__review= info
+    picture
+      source(media='(min-width: 1200px)' type='image/webp'
+        srcset='img/' + img + '-desktop.webp 1x, img/' + img + '-desktop.webp 2x')
+      source(media='(min-width: 1200px)'
+        srcset='img/' + img + '-desktop.jpg 1x, img/' + img + '-desktop.jpg 2x')
+      source(media='(min-width: 768px)' type='image/webp'
+        srcset='img/' + img + '-tablet.webp 1x, img/' + img + '-tablet.webp 2x')
+      source(media='(min-width: 768px)'
+        srcset='img/' + img + '-tablet.jpg 1x, img/' + img + '-tablet.jpg 2x')
+      source(media='(min-width: 320px)' type='image/webp'
+        srcset='img/' + img + '.webp 1x, img/' + img + '.webp 2x')
+      img.slider-reviews__img(src='img/' + img + '.jpg' alt='Картинка')
+
+mixin newsItem (dataNum, month, info)
+  div.news__data-container
+    p.news__data= dataNum
+    p.news__month= month
+  p.news__review= info
