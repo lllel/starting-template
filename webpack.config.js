@@ -2,7 +2,7 @@ const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
-const pug = require('./webpack/pug');
+// const pug = require('./webpack/pug');
 const devserver = require('./webpack/devserver');
 const css = require('./webpack/css');
 const fileLoader = require('./webpack/file-loader');
@@ -72,4 +72,5 @@ module.exports = function (env) {
   return null;
 };
 
-// npm install react react-dom --save-dev
+// npm install react react-dom --save
+// npm install babel-preset-env babel-preset-react --save-dev
