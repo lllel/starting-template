@@ -48,7 +48,7 @@ const common = merge([
     }
   },
 
-  pug(),
+  // pug(),
   css(),
   fileLoader(),
   copy()
@@ -71,3 +71,5 @@ module.exports = function (env) {
 
   return null;
 };
+
+// npm install react react-dom --save-dev
