@@ -2,24 +2,27 @@ const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
-// const pug = require('./webpack/pug');
 const devserver = require('./webpack/devserver');
 const css = require('./webpack/css');
 const fileLoader = require('./webpack/file-loader');
 const imagemin = require('./webpack/imagemin');
-const copy = require('./webpack/copy');
+// const pug = require('./webpack/pug');
+// const copy = require('./webpack/copy');
 
 const common = merge([
   {
     entry: {
-      app: [
-        './source/js/index.js',
-        './source/sass/style.scss'
-      ]
+      index: './source/js/index.js'
+
+      // app: [
+      //   './source/js/index.js',
+      //   './source/sass/style.scss'
+      // ]
     },
     output: {
-      filename: 'js/bundle.js',
-      path: path.join(__dirname, 'build')
+      path: path.resolve(__dirname, 'build'),
+      chunkFilename: 'js/[name].bundle-[chunkhash:4].js',
+      filename: 'js/[name].bundle-[chunkhash:4].js'
     },
     mode: 'none',
     devtool: 'source-map',
@@ -34,24 +37,38 @@ const common = merge([
       new HtmlWebpackPlugin({
         filename: 'index.html',
         chunks: ['index'],
-        template: path.join(__dirname, 'source') + '/pug/index.pug'
+        template: path.join(__dirname, 'source') + '/index.html'
       })
     ],
 
     module: {
       rules: [
         {
-          test: /\.(js|jsx)$/,
+          test: /\.(js|jsx)$/i,
           loader: 'babel-loader'
         }
       ]
     }
   },
 
+  {
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          commons: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendor',
+            chunks: 'initial'
+          }
+        }
+      }
+    },
+  },
+
   // pug(),
   css(),
-  fileLoader(),
-  copy()
+  fileLoader()
+  // copy()
 ]);
 
 module.exports = function (env) {
@@ -74,3 +91,7 @@ module.exports = function (env) {
 
 // npm install react react-dom --save
 // npm install babel-preset-env babel-preset-react --save-dev
+
+// npm install pug pug-loader --save-dev
+// npm install extract-text-webpack-plugin --save-dev
+// npm install copy-webpack-plugin --save-dev

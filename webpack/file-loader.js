@@ -6,7 +6,7 @@ module.exports = function () {
           test: /\.(jpe?g|png|gif|svg)$/i,
           loader: 'file-loader',
           options: {
-            name: 'img/[name].[ext]'
+            name: 'img/[name]-[hash:4].[ext]'
           }
         },
 
@@ -14,7 +14,7 @@ module.exports = function () {
           test: /\.(woff|woff2)$/,
           loader: 'file-loader',
           options: {
-            name: 'fonts/[name].[ext]'
+            name: 'fonts/[name]-[hash:4].[ext]'
           }
         }
       ]
