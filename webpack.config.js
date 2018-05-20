@@ -38,7 +38,6 @@ const common = merge([
 
       new HtmlWebpackPlugin({
         filename: 'index.html',
-        chunks: ['index'],
         template: path.join(__dirname, 'source') + '/index.html'
       })
     ]
