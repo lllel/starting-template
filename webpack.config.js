@@ -2,6 +2,8 @@ const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
+const jsJsx = require('./webpack/jsJsx');
+const vendor = require('./webpack/vendor');
 const devserver = require('./webpack/devserver');
 const css = require('./webpack/css');
 const fileLoader = require('./webpack/file-loader');
@@ -39,32 +41,11 @@ const common = merge([
         chunks: ['index'],
         template: path.join(__dirname, 'source') + '/index.html'
       })
-    ],
-
-    module: {
-      rules: [
-        {
-          test: /\.(js|jsx)$/i,
-          loader: 'babel-loader'
-        }
-      ]
-    }
+    ]
   },
 
-  {
-    optimization: {
-      splitChunks: {
-        cacheGroups: {
-          commons: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendor',
-            chunks: 'initial'
-          }
-        }
-      }
-    },
-  },
-
+  jsJsx(),
+  vendor(),
   // pug(),
   css(),
   fileLoader()
